@@ -76,7 +76,7 @@ async def start_meeting(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
 
     if user_id in active_meetings[chat_id]:
         await update.message.reply_text(
-            f"⏱️ {user_name}, you already have an active meeting. Use /End_meeting to end it first."
+            f"⏱️ {user_name}, you already have an active meeting. Use /end_meeting to end it first."
         )
         return
 
@@ -94,7 +94,7 @@ async def end_meeting(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 
     if chat_id not in active_meetings or user_id not in active_meetings[chat_id]:
         await update.message.reply_text(
-            f"⏱️ {user_name}, you don't have an active meeting. Use /Start_meeting first."
+            f"⏱️ {user_name}, you don't have an active meeting. Use /start_meeting first."
         )
         return
 
@@ -750,8 +750,8 @@ async def update_time(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 async def post_init(application: Application) -> None:
     """Set bot commands menu (shown when user types /)."""
     commands = [
-        BotCommand("Start_meeting", "Start meeting time tracking"),
-        BotCommand("End_meeting", "End meeting and update time sheet"),
+        BotCommand("start_meeting", "Start meeting time tracking"),
+        BotCommand("end_meeting", "End meeting and update time sheet"),
         BotCommand("summary", "Show time and budget summary"),
         BotCommand("pdf", "Send receipt(s) for extraction"),
         BotCommand("update", "Add manual time for a user (e.g. /update @Audrey 60)"),
@@ -774,10 +774,10 @@ def main() -> None:
 
     # Command handlers - only for allowed user
     application.add_handler(
-        CommandHandler("Start_meeting", start_meeting, filters=user_filter)
+        CommandHandler("start_meeting", start_meeting, filters=user_filter)
     )
     application.add_handler(
-        CommandHandler("End_meeting", end_meeting, filters=user_filter)
+        CommandHandler("end_meeting", end_meeting, filters=user_filter)
     )
     application.add_handler(
         CommandHandler("summary", summary, filters=user_filter)

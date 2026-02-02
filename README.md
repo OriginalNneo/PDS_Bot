@@ -4,7 +4,7 @@ A Telegram bot for meeting time tracking, document management, and receipt extra
 
 ## Features
 
-- **Meeting Time Tracking**: `/Start_meeting` and `/End_meeting` to track meeting duration and update Google Time Sheets
+- **Meeting Time Tracking**: `/start_meeting` and `/end_meeting` to track meeting duration and update Google Time Sheets
 - **Summary**: `/summary` for a brief overview of times and budget
 - **Document Upload**: PDF and Word documents uploaded to Google Drive in DD/MM/YYYY folders
 - **Receipt Extraction**: `/pdf` + PDF attachment to extract amounts and update SOA (Statement of Account) tracking sheet
@@ -89,8 +89,8 @@ Mention the bot with @YourBotName for all commands:
 
 | Command | Description |
 |---------|-------------|
-| `@BotName /Start_meeting` | Start tracking meeting time |
-| `@BotName /End_meeting` | End meeting and update Time Sheet |
+| `@BotName /start_meeting` | Start tracking meeting time |
+| `@BotName /end_meeting` | End meeting and update Time Sheet |
 | `@BotName /summary` | Get summary of times and budget |
 | `@BotName /update @username minutes` | Manually add time (e.g. /update @Audrey 60) |
 | `@BotName /pdf` | Then reply with PDF receipt for extraction |
