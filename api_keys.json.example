@@ -1,0 +1,17 @@
+{
+  "bot_key": "Secret Key",
+  "google_credentials": "credentials.json",
+  "spreadsheet_id": "",
+  "drive_folder_id": "",
+  "user_sheets": {
+    "Andrew_Time": "0",
+    "Anna_Time": "",
+    "Audrey_Time": "",
+    "Jonathan_Time": "",
+    "Nathaniel_Time": ""
+  },
+  "soa_spreadsheet_id": "",
+  "budget_total": "",
+  "gemini_api_key": "",
+  "gemini_model": "gemini-2.5-flash-lite"
+}
