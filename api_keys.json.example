@@ -1,5 +1,11 @@
 {
   "bot_key": "Secret Key",
+  "allowed_user_id": "123456789",
+  "allowed_user_ids": [123456789, 987654321],
+  "allowed_user_names": {
+    "123456789": "Nathaniel",
+    "987654321": "Andrew"
+  },
   "google_credentials": "credentials.json",
   "spreadsheet_id": "",
   "drive_folder_id": "",

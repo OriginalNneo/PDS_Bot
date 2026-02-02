@@ -43,6 +43,9 @@ Edit `api_keys.json` (or copy from `api_keys.json.example`):
 ```
 
 - **bot_key**: Get from [@BotFather](https://t.me/BotFather) on Telegram
+- **allowed_user_id** (single user): Your Telegram user ID. Get it from [@userinfobot](https://t.me/userinfobot)
+- **allowed_user_ids** (multiple users): List of Telegram user IDs, e.g. `[123456789, 987654321]`
+- **allowed_user_names** (optional): Map user IDs to display names, e.g. `{"123456789": "Nathaniel", "987654321": "Andrew"}`
 - **google_credentials**: Path to Google service account JSON (see below)
 - **spreadsheet_id**: Main Time Sheets spreadsheet ID (from URL)
 - **user_sheets**: Map each user's sheet (Andrew_Time, Anna_Time, etc.) to its gid (from URL `#gid=123`)
@@ -128,4 +131,6 @@ Mention the bot with @YourBotName for all commands:
 
 ## User Mapping
 
-Edit `config.py` to map Telegram usernames to display names (Andrew, Anna, Audrey, Jonathan, Nathaniel).
+- **Single user**: Set `allowed_user_id` and optionally `allowed_user_display_name` in api_keys.json
+- **Multiple users**: Set `allowed_user_ids` (list of Telegram user IDs) and optionally `allowed_user_names` (user_id → display name)
+- **Username mapping**: Edit `config.py` USER_MAPPING to map Telegram usernames to display names (Andrew, Anna, Audrey, Jonathan, Nathaniel)

@@ -47,12 +47,18 @@ def get_user_display_name(update: Update) -> str:
     user = update.effective_user
     if not user:
         return "Unknown"
-    # Check allowed user display name first (when bot listens to one user)
     config = load_config()
+    # Check allowed_user_names mapping (user_id -> display_name) for multiple users
+    allowed_user_names = config.get("allowed_user_names", {})
+    if isinstance(allowed_user_names, dict):
+        uid_str = str(user.id)
+        if uid_str in allowed_user_names:
+            return allowed_user_names[uid_str]
+    # Fallback: single allowed user with allowed_user_display_name
     allowed_user_id = config.get("allowed_user_id")
     if allowed_user_id and user.id == int(allowed_user_id):
         return config.get("allowed_user_display_name", "Nathaniel")
-    # Try username first
+    # Try username first (USER_MAPPING)
     username = (user.username or "").lower()
     for key, display in USER_MAPPING.items():
         if key in username or username in key:
@@ -763,12 +769,20 @@ def main() -> None:
     """Run the bot."""
     token = get_bot_token()
     config = load_config()
-    allowed_user_id = config.get("allowed_user_id")
-    if not allowed_user_id:
+    # Support both allowed_user_id (single) and allowed_user_ids (list)
+    allowed_user_ids = config.get("allowed_user_ids")
+    if allowed_user_ids is None:
+        allowed_user_id = config.get("allowed_user_id")
+        if allowed_user_id:
+            allowed_user_ids = [int(allowed_user_id)]
+    else:
+        allowed_user_ids = [int(uid) for uid in allowed_user_ids]
+    if not allowed_user_ids:
         raise ValueError(
-            "Please set allowed_user_id in api_keys.json (your Telegram user ID)."
+            "Please set allowed_user_id or allowed_user_ids in api_keys.json "
+            "(your Telegram user ID(s)). Get your ID from @userinfobot on Telegram."
         )
-    user_filter = filters.User(user_id=int(allowed_user_id))
+    user_filter = filters.User(user_id=allowed_user_ids)
 
     application = Application.builder().token(token).post_init(post_init).build()
 
