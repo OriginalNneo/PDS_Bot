@@ -770,13 +770,13 @@ def main() -> None:
     token = get_bot_token()
     config = load_config()
     # Support both allowed_user_id (single) and allowed_user_ids (list)
-    allowed_user_ids = config.get("allowed_user_ids")
-    if allowed_user_ids is None:
-        allowed_user_id = config.get("allowed_user_id")
-        if allowed_user_id:
-            allowed_user_ids = [int(allowed_user_id)]
+    raw_ids = config.get("allowed_user_ids") or config.get("allowed_user_id")
+    if raw_ids is None:
+        allowed_user_ids = []
+    elif isinstance(raw_ids, list):
+        allowed_user_ids = [int(uid) for uid in raw_ids]
     else:
-        allowed_user_ids = [int(uid) for uid in allowed_user_ids]
+        allowed_user_ids = [int(raw_ids)]
     if not allowed_user_ids:
         raise ValueError(
             "Please set allowed_user_id or allowed_user_ids in api_keys.json "
