@@ -56,8 +56,9 @@ def get_user_display_name(update: Update) -> str:
             return allowed_user_names[uid_str]
     # Fallback: single allowed user with allowed_user_display_name
     allowed_user_id = config.get("allowed_user_id")
-    if allowed_user_id and user.id == int(allowed_user_id):
-        return config.get("allowed_user_display_name", "Nathaniel")
+    if allowed_user_id is not None and not isinstance(allowed_user_id, list):
+        if user.id == int(allowed_user_id):
+            return config.get("allowed_user_display_name", "Nathaniel")
     # Try username first (USER_MAPPING)
     username = (user.username or "").lower()
     for key, display in USER_MAPPING.items():
